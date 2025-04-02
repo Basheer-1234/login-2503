@@ -48,3 +48,11 @@ Resources:
       Tags:
       - Key: Name
         Value: lms-internet-gateway
+  
+  lmsAttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId:
+        Ref: lmsVPC
+      InternetGatewayId:
+        Ref: lmsInternetGateway  
