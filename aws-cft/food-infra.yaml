@@ -1,0 +1,110 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: food Project CloudFormation template.
+Resources:
+  foodVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      Tags:
+       - Key: Name
+         Value: food-vpc
+
+  foodwebSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref foodVPC
+      CidrBlock: 10.0.0.0/24
+      AvailabilityZone: "us-east-2a"
+      MapPublicIpOnLaunch: "true"
+      Tags:
+      - Key: Name
+        Value: food-web-subnet            
+
+  foodapiSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref foodVPC
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: "us-east-2a"
+      MapPublicIpOnLaunch: "true"
+      Tags:
+      - Key: Name
+        Value: food-api-subnet 
+
+  fooddbSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref foodVPC
+      CidrBlock: 10.0.2.0/24
+      AvailabilityZone: "us-east-2a"
+      MapPublicIpOnLaunch: "false"
+      Tags:
+      - Key: Name
+        Value: food-database-subnet 
+
+  foodInternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+      - Key: Name
+        Value: food-internet-gateway
+  
+  foodAttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId:
+        Ref: foodVPC
+      InternetGatewayId:
+        Ref: foodInternetGateway  
+
+  foodpublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:  
+        Ref: foodVPC
+      Tags:
+      - Key: Name
+        Value: food-public-rt
+
+  foodinternetRoute:
+    Type: AWS::EC2::Route
+    DependsOn: foodAttachGateway
+    Properties:
+       RouteTableId:
+         Ref: foodpublicRouteTable
+       DestinationCidrBlock: 0.0.0.0/0
+       GatewayId:
+         Ref: foodInternetGateway
+
+  foodwebSubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId:
+        Ref: foodwebSubnet
+      RouteTableId:
+        Ref: foodpublicRouteTable
+
+  foodapiSubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId:
+        Ref: foodapiSubnet
+      RouteTableId:
+        Ref: foodpublicRouteTable
+
+  foodprivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:  
+        Ref: foodVPC
+      Tags:
+      - Key: Name
+        Value: food-private-rt
+
+  fooddbSubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId:
+        Ref: fooddbSubnet
+      RouteTableId:
+        Ref: foodprivateRouteTable
