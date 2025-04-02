@@ -91,3 +91,12 @@ Resources:
         Ref: lmsapiSubnet
       RouteTableId:
         Ref: lmspublicRouteTable
+
+  lmsprivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:  
+        Ref: lmsVPC
+      Tags:
+      - Key: Name
+        Value: lms-private-rt
