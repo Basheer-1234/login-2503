@@ -100,3 +100,11 @@ Resources:
       Tags:
       - Key: Name
         Value: lms-private-rt
+
+  lmsdbSubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId:
+        Ref: lmsdbSubnet
+      RouteTableId:
+        Ref: lmsprivateRouteTable
