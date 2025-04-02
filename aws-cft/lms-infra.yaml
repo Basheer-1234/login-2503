@@ -65,3 +65,13 @@ Resources:
       Tags:
       - Key: Name
         Value: lms-public-rt
+
+  lmsinternetRoute:
+    Type: AWS::EC2::Route
+    DependsOn: lmsAttachGateway
+    Properties:
+       RouteTableId:
+         Ref: lmspublicRouteTable
+       DestinationCidrBlock: 0.0.0.0/0
+       GatewayId:
+         Ref: lmsInternetGateway
