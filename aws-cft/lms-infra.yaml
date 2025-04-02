@@ -30,3 +30,14 @@ Resources:
       Tags:
       - Key: Name
         Value: lms-api-subnet 
+
+  lmsdbSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref lmsVPC
+      CidrBlock: 10.0.2.0/24
+      AvailabilityZone: "us-east-2a"
+      MapPublicIpOnLaunch: "false"
+      Tags:
+      - Key: Name
+        Value: lms-database-subnet 
