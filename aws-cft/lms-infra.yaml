@@ -7,4 +7,15 @@ Resources:
       CidrBlock: 10.0.0.0/16
       Tags:
        - Key: Name
-         Value: lms-vpc            
+         Value: lms-vpc
+
+  lmswebSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref lmsVPC
+      CidrBlock: 10.0.0.0/24
+      AvailabilityZone: "us-east-2a"
+      MapPublicIpOnLaunch: "true"
+      Tags:
+      - Key: Name
+        Value: lms-web-subnet            
