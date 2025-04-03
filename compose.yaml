@@ -1,0 +1,28 @@
+services:
+  svc1:
+    image: ravi2krishna/login-2503
+    ports:
+      - "8080:80"
+  svc2:
+    image: ravi2krishna/login-2503:1.1
+    ports:
+      - "8081:80"
+  svc3:
+    image: ravi2krishna/login-2503:2.1
+    ports:
+      - "8082:80"
+  svc4:
+    image: ravi2krishna/login-2503:3.1
+    ports:
+      - "8083:80"
+  svc5:
+    image: nginx
+    ports:
+      - "8084:80"
+    volumes:
+      - /home/ubuntu/app-services/ecomm:/usr/share/nginx/html
+  svc6:
+    build: ./food
+    image: ravi2krishna/food
+    ports:
+      - "8085:80"
