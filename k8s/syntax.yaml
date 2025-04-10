@@ -1,0 +1,38 @@
+# - Comment, will be ignored by k8s
+
+# Simple Key Values
+key: value
+name: ravi
+city: hyderabad
+zip: 500081
+
+# Dictionary / Map - Set Of Key Values
+trainer:
+  name: ravi
+  course: k8s
+  time: 9
+
+# List / Arrays - Mutiple Values
+courses:
+- aws
+- azure
+- devops
+- python
+
+# k8s manifests will have 4 top level items
+apiVersion: # key: value
+kind:       # key: value
+metadata:   # dictionary & lists
+spec:       # dictionary & lists
+
+# pod syntax
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: c1
+    image: nginx
+    ports:
+    - containerPort: 80
