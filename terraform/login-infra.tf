@@ -4,45 +4,45 @@ resource "aws_vpc" "login-vpc" {
   instance_tenancy = "default"
 
   tags = {
-    Name = "lms-vpc"
+    Name = "login-vpc"
   }
 }
 
 # Web Subnet
-resource "aws_subnet" "lms-web-sn" {
+resource "aws_subnet" "login-web-sn" {
   vpc_id     = aws_vpc.login-vpc.id
   cidr_block = "10.0.1.0/24"
   map_public_ip_on_launch = "true"
 
   tags = {
-    Name = "lms-web-subnet"
+    Name = "login-web-subnet"
   }
 }
 
 # API Subnet
-resource "aws_subnet" "lms-api-sn" {
+resource "aws_subnet" "login-api-sn" {
   vpc_id     = aws_vpc.login-vpc.id
   cidr_block = "10.0.2.0/24"
   map_public_ip_on_launch = "true"
 
   tags = {
-    Name = "lms-api-subnet"
+    Name = "login-api-subnet"
   }
 }
 
 # DB Subnet
-resource "aws_subnet" "lms-db-sn" {
+resource "aws_subnet" "login-db-sn" {
   vpc_id     = aws_vpc.login-vpc.id
   cidr_block = "10.0.3.0/24"
   map_public_ip_on_launch = "false"
 
   tags = {
-    Name = "lms-database-subnet"
+    Name = "login-database-subnet"
   }
 }
 
 # Internet Gateway
-resource "aws_internet_gateway" "lms-igw" {
+resource "aws_internet_gateway" "login-igw" {
   vpc_id = aws_vpc.login-vpc.id
 
   tags = {
@@ -56,7 +56,7 @@ resource "aws_route_table" "login-pub-rt" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.lms-igw.id
+    gateway_id = aws_internet_gateway.login-igw.id
   }
 
   tags = {
