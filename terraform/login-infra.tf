@@ -63,3 +63,10 @@ resource "aws_route_table" "login-pub-rt" {
     Name = "login-public-rt"
   }
 }
+
+
+# Public Route Table - Web SN ASC
+resource "aws_route_table_association" "login-web-sn-asc" {
+  subnet_id      = aws_subnet.login-web-sn.id
+  route_table_id = aws_route_table.login-pub-rt.id
+}
