@@ -70,3 +70,9 @@ resource "aws_route_table_association" "login-web-sn-asc" {
   subnet_id      = aws_subnet.login-web-sn.id
   route_table_id = aws_route_table.login-pub-rt.id
 }
+
+# Public Route Table - API SN ASC
+resource "aws_route_table_association" "login-api-sn-asc" {
+  subnet_id      = aws_subnet.login-api-sn.id
+  route_table_id = aws_route_table.login-pub-rt.id
+}
