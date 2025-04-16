@@ -184,3 +184,9 @@ resource "aws_network_acl" "login-db-nacl" {
     Name = "login-db-nacl"
   }
 }
+
+# DB NACL Association
+resource "aws_network_acl_association" "login-db-nacl-asc" {
+  network_acl_id = aws_network_acl.login-db-nacl.id
+  subnet_id      = aws_subnet.login-db-sn.id
+}
