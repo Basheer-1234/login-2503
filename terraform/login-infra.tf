@@ -219,3 +219,12 @@ resource "aws_vpc_security_group_ingress_rule" "login-web-sg-http" {
   ip_protocol       = "tcp"
   to_port           = 80
 }
+
+# Web Security Group - Outbound All
+resource "aws_vpc_security_group_egress_rule" "login-web-sg-outbound" {
+  security_group_id = aws_security_group.login-web-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 0
+  ip_protocol       = "tcp"
+  to_port           = 65535
+}
