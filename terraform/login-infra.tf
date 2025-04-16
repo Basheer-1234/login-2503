@@ -157,3 +157,30 @@ resource "aws_network_acl_association" "login-api-nacl-asc" {
   network_acl_id = aws_network_acl.login-api-nacl.id
   subnet_id      = aws_subnet.login-api-sn.id
 }
+
+# DB NACL
+resource "aws_network_acl" "login-db-nacl" {
+  vpc_id = aws_vpc.login-vpc.id
+
+  egress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 65535
+  }
+
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 65535
+  }
+
+  tags = {
+    Name = "login-db-nacl"
+  }
+}
