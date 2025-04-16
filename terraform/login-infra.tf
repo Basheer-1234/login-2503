@@ -277,3 +277,12 @@ resource "aws_security_group" "login-db-sg" {
     Name = "login-db"
   }
 }
+
+# DB Security Group - SSH
+resource "aws_vpc_security_group_ingress_rule" "login-db-sg-ssh" {
+  security_group_id = aws_security_group.login-db-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
