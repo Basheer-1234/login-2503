@@ -9,6 +9,6 @@ echo "Install Nginx"
 sudo apt install -y nginx
 echo "Remove Sample Pages"
 sudo rm -r /var/www/html/
-echo "Clone Login App"
-sudo git clone https://github.com/ravi2krishna/login-2503.git /var/www/html
-echo "Web App Deployment Completed"
+echo "Clone Ecomm App"
+sudo git clone https://github.com/ravi2krishna/ecomm.git /var/www/html
+echo "Ecomm App Deployment Completed"
