@@ -228,3 +228,14 @@ resource "aws_vpc_security_group_egress_rule" "login-web-sg-outbound" {
   ip_protocol       = "tcp"
   to_port           = 65535
 }
+
+# API Security Group
+resource "aws_security_group" "login-api-sg" {
+  name        = "login-api"
+  description = "Allow API Server Traffic"
+  vpc_id      = aws_vpc.login-vpc.id
+
+  tags = {
+    Name = "login-api"
+  }
+}
