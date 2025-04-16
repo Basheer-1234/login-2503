@@ -190,3 +190,14 @@ resource "aws_network_acl_association" "login-db-nacl-asc" {
   network_acl_id = aws_network_acl.login-db-nacl.id
   subnet_id      = aws_subnet.login-db-sn.id
 }
+
+# Web Security Group
+resource "aws_security_group" "login-web-sg" {
+  name        = "login-web"
+  description = "Allow WebServer Traffic"
+  vpc_id      = aws_vpc.login-vpc.id
+
+  tags = {
+    Name = "login-web"
+  }
+}
