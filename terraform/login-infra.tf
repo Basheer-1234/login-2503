@@ -76,3 +76,12 @@ resource "aws_route_table_association" "login-api-sn-asc" {
   subnet_id      = aws_subnet.login-api-sn.id
   route_table_id = aws_route_table.login-pub-rt.id
 }
+
+# Private Route Table
+resource "aws_route_table" "login-pvt-rt" {
+  vpc_id = aws_vpc.login-vpc.id
+
+  tags = {
+    Name = "login-private-rt"
+  }
+}
