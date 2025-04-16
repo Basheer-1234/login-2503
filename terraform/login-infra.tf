@@ -286,3 +286,12 @@ resource "aws_vpc_security_group_ingress_rule" "login-db-sg-ssh" {
   ip_protocol       = "tcp"
   to_port           = 22
 }
+
+# DB Security Group - POSTGRES
+resource "aws_vpc_security_group_ingress_rule" "login-db-sg-postgres" {
+  security_group_id = aws_security_group.login-db-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 5432
+  ip_protocol       = "tcp"
+  to_port           = 5432
+}
