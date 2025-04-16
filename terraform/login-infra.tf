@@ -85,3 +85,9 @@ resource "aws_route_table" "login-pvt-rt" {
     Name = "login-private-rt"
   }
 }
+
+# Private Route Table - DB SN ASC
+resource "aws_route_table_association" "login-db-sn-asc" {
+  subnet_id      = aws_subnet.login-db-sn.id
+  route_table_id = aws_route_table.login-pvt-rt.id
+}
