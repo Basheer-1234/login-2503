@@ -151,3 +151,9 @@ resource "aws_network_acl" "login-api-nacl" {
     Name = "login-api-nacl"
   }
 }
+
+# API NACL Association
+resource "aws_network_acl_association" "login-api-nacl-asc" {
+  network_acl_id = aws_network_acl.login-api-nacl.id
+  subnet_id      = aws_subnet.login-api-sn.id
+}
