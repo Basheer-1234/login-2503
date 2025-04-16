@@ -257,3 +257,12 @@ resource "aws_vpc_security_group_ingress_rule" "login-api-sg-http" {
   ip_protocol       = "tcp"
   to_port           = 8080
 }
+
+# API Security Group - Outbound All
+resource "aws_vpc_security_group_egress_rule" "login-api-sg-outbound" {
+  security_group_id = aws_security_group.login-api-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 0
+  ip_protocol       = "tcp"
+  to_port           = 65535
+}
