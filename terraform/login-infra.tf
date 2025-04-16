@@ -239,3 +239,12 @@ resource "aws_security_group" "login-api-sg" {
     Name = "login-api"
   }
 }
+
+# API Security Group - SSH
+resource "aws_vpc_security_group_ingress_rule" "login-api-sg-ssh" {
+  security_group_id = aws_security_group.login-api-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
