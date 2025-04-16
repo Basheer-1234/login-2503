@@ -248,3 +248,12 @@ resource "aws_vpc_security_group_ingress_rule" "login-api-sg-ssh" {
   ip_protocol       = "tcp"
   to_port           = 22
 }
+
+# API Security Group - HTTP
+resource "aws_vpc_security_group_ingress_rule" "login-api-sg-http" {
+  security_group_id = aws_security_group.login-api-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 8080
+  ip_protocol       = "tcp"
+  to_port           = 8080
+}
