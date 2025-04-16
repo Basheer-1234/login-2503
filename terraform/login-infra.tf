@@ -266,3 +266,14 @@ resource "aws_vpc_security_group_egress_rule" "login-api-sg-outbound" {
   ip_protocol       = "tcp"
   to_port           = 65535
 }
+
+# DB Security Group
+resource "aws_security_group" "login-db-sg" {
+  name        = "login-db"
+  description = "Allow DB Server Traffic"
+  vpc_id      = aws_vpc.login-vpc.id
+
+  tags = {
+    Name = "login-db"
+  }
+}
