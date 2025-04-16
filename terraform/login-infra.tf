@@ -91,3 +91,30 @@ resource "aws_route_table_association" "login-db-sn-asc" {
   subnet_id      = aws_subnet.login-db-sn.id
   route_table_id = aws_route_table.login-pvt-rt.id
 }
+
+# Web NACL
+resource "aws_network_acl" "login-web-nacl" {
+  vpc_id = aws_vpc.login-vpc.id
+
+  egress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 65535
+  }
+
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 65535
+  }
+
+  tags = {
+    Name = "login-web-nacl"
+  }
+}
