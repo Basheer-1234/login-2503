@@ -201,3 +201,12 @@ resource "aws_security_group" "login-web-sg" {
     Name = "login-web"
   }
 }
+
+# Web Security Group - SSH
+resource "aws_vpc_security_group_ingress_rule" "login-web-sg-ssh" {
+  security_group_id = aws_security_group.login-web-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
