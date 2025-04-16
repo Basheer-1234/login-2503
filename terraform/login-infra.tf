@@ -304,3 +304,17 @@ resource "aws_vpc_security_group_egress_rule" "login-db-sg-outbound" {
   ip_protocol       = "tcp"
   to_port           = 65535
 }
+
+# Web Server Instance
+resource "aws_instance" "login-web-server" {
+  ami           = "ami-0c3b809fcf2445b6a"
+  instance_type = "t2.micro"
+  key_name      = "2501"
+  subnet_id     = aws_subnet.login-web-sn.id
+  vpc_security_group_ids = [aws_security_group.login-web-sg.id]
+  user_data     = file("script.sh")
+
+  tags = {
+    Name = "login-web-server"
+  }
+}
