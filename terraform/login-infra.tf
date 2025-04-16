@@ -118,3 +118,9 @@ resource "aws_network_acl" "login-web-nacl" {
     Name = "login-web-nacl"
   }
 }
+
+# Web NACL Association
+resource "aws_network_acl_association" "login-web-nacl-asc" {
+  network_acl_id = aws_network_acl.login-web-nacl.id
+  subnet_id      = aws_subnet.login-web-sn.id
+}
