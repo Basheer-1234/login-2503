@@ -85,7 +85,7 @@ resource "azurerm_network_security_rule" "login-web-nsg-ssh" {
 # Web NSG - HTTP rule
 resource "azurerm_network_security_rule" "login-web-nsg-http" {
   name                        = "login-web-http"
-  priority                    = 100
+  priority                    = 110
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
