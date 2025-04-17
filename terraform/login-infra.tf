@@ -223,3 +223,9 @@ resource "azurerm_network_interface" "login-db-nic" {
     private_ip_address_allocation = "Dynamic"
   }
 }
+
+# DB NIC - NSG ASC
+resource "azurerm_network_interface_security_group_association" "login-db-nic-nsg-asc" {
+  network_interface_id      = azurerm_network_interface.login-db-nic.id
+  network_security_group_id = azurerm_network_security_group.login-db-nsg.id
+}
