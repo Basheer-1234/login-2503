@@ -47,3 +47,15 @@ resource "azurerm_public_ip" "login-web-pip" {
     environment = "web"
   }
 }
+
+# API Public IP
+resource "azurerm_public_ip" "login-api-pip" {
+  name                = "login-api-pip"
+  resource_group_name = azurerm_resource_group.login-rg.name
+  location            = azurerm_resource_group.login-rg.location
+  allocation_method   = "Static"
+
+  tags = {
+    environment = "api"
+  }
+}
