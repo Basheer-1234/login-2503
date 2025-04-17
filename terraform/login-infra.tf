@@ -35,3 +35,15 @@ resource "azurerm_subnet" "login-db-sn" {
   virtual_network_name = azurerm_virtual_network.login-vnet.name
   address_prefixes     = ["10.0.3.0/24"]
 }
+
+# Web Public IP
+resource "azurerm_public_ip" "login-web-pip" {
+  name                = "login-web-pip"
+  resource_group_name = azurerm_resource_group.login-rg.name
+  location            = azurerm_resource_group.login-rg.location
+  allocation_method   = "Static"
+
+  tags = {
+    environment = "web"
+  }
+}
