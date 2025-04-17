@@ -184,3 +184,9 @@ resource "azurerm_network_interface" "login-web-nic" {
     public_ip_address_id          = azurerm_public_ip.login-web-pip.id
   }
 }
+
+# Web NIC - NSG ASC
+resource "azurerm_network_interface_security_group_association" "login-web-nic-nsg-asc" {
+  network_interface_id      = azurerm_network_interface.login-web-nic.id
+  network_security_group_id = azurerm_network_security_group.login-web-nsg.id
+}
