@@ -118,3 +118,18 @@ resource "azurerm_network_security_rule" "login-api-nsg-ssh" {
   resource_group_name         = azurerm_resource_group.login-rg.name
   network_security_group_name = azurerm_network_security_group.login-web-nsg.name
 }
+
+# API NSG - HTTP rule
+resource "azurerm_network_security_rule" "login-api-nsg-http" {
+  name                        = "login-api-http"
+  priority                    = 110
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "8080"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.login-rg.name
+  network_security_group_name = azurerm_network_security_group.login-web-nsg.name
+}
