@@ -116,7 +116,7 @@ resource "azurerm_network_security_rule" "login-api-nsg-ssh" {
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.login-rg.name
-  network_security_group_name = azurerm_network_security_group.login-web-nsg.name
+  network_security_group_name = azurerm_network_security_group.login-api-nsg.name
 }
 
 # API NSG - HTTP rule
@@ -131,7 +131,7 @@ resource "azurerm_network_security_rule" "login-api-nsg-http" {
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.login-rg.name
-  network_security_group_name = azurerm_network_security_group.login-web-nsg.name
+  network_security_group_name = azurerm_network_security_group.login-api-nsg.name
 }
 
 # DB NSG
@@ -153,7 +153,7 @@ resource "azurerm_network_security_rule" "login-db-nsg-ssh" {
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.login-rg.name
-  network_security_group_name = azurerm_network_security_group.login-web-nsg.name
+  network_security_group_name = azurerm_network_security_group.login-db-nsg.name
 }
 
 # DB NSG - Postgres rule
@@ -168,5 +168,5 @@ resource "azurerm_network_security_rule" "login-db-nsg-postgres" {
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.login-rg.name
-  network_security_group_name = azurerm_network_security_group.login-web-nsg.name
+  network_security_group_name = azurerm_network_security_group.login-db-nsg.name
 }
