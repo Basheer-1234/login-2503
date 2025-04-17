@@ -190,3 +190,17 @@ resource "azurerm_network_interface_security_group_association" "login-web-nic-n
   network_interface_id      = azurerm_network_interface.login-web-nic.id
   network_security_group_id = azurerm_network_security_group.login-web-nsg.id
 }
+
+# API NIC
+resource "azurerm_network_interface" "login-api-nic" {
+  name                = "login-api-nic"
+  location            = azurerm_resource_group.login-rg.location
+  resource_group_name = azurerm_resource_group.login-rg.name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.login-api-sn.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.login-api-pip.id
+  }
+}
