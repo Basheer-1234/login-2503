@@ -204,3 +204,9 @@ resource "azurerm_network_interface" "login-api-nic" {
     public_ip_address_id          = azurerm_public_ip.login-api-pip.id
   }
 }
+
+# API NIC - NSG ASC
+resource "azurerm_network_interface_security_group_association" "login-api-nic-nsg-asc" {
+  network_interface_id      = azurerm_network_interface.login-api-nic.id
+  network_security_group_id = azurerm_network_security_group.login-api-nsg.id
+}
