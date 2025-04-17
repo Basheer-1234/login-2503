@@ -210,3 +210,16 @@ resource "azurerm_network_interface_security_group_association" "login-api-nic-n
   network_interface_id      = azurerm_network_interface.login-api-nic.id
   network_security_group_id = azurerm_network_security_group.login-api-nsg.id
 }
+
+# DB NIC
+resource "azurerm_network_interface" "login-db-nic" {
+  name                = "login-db-nic"
+  location            = azurerm_resource_group.login-rg.location
+  resource_group_name = azurerm_resource_group.login-rg.name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.login-db-sn.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
