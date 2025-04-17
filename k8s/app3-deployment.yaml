@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: food
+spec:
+  replicas: 1 # No Of Pod Copies
+  selector:
+    matchLabels:
+      app: food
+  template: # Pod Template
+    metadata:
+      labels:
+        app: food
+    spec:
+      containers:
+      - name: c1
+        image: ravi2krishna/food
+        ports:
+        - containerPort: 80

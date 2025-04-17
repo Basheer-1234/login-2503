@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecomm
+spec:
+  replicas: 1 # No Of Pod Copies
+  selector:
+    matchLabels:
+      app: ecomm
+  template: # Pod Template
+    metadata:
+      labels:
+        app: ecomm
+    spec:
+      containers:
+      - name: c1
+        image: ravi2krishna/ecomm
+        ports:
+        - containerPort: 80
