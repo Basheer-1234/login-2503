@@ -27,3 +27,11 @@ resource "azurerm_subnet" "login-api-sn" {
   virtual_network_name = azurerm_virtual_network.login-vnet.name
   address_prefixes     = ["10.0.2.0/24"]
 }
+
+# DB Subnet
+resource "azurerm_subnet" "login-db-sn" {
+  name                 = "login-db-subnet"
+  resource_group_name  = azurerm_resource_group.login-rg.name
+  virtual_network_name = azurerm_virtual_network.login-vnet.name
+  address_prefixes     = ["10.0.3.0/24"]
+}
