@@ -4,3 +4,24 @@ kind: Namespace
 metadata:
   name: dev
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: login
+  namespace: dev
+spec:
+  replicas: 1 # No Of Pod Copies
+  selector:
+    matchLabels:
+      app: login
+  template: # Pod Template
+    metadata:
+      labels:
+        app: login
+    spec:
+      containers:
+      - name: c1
+        image: ravi2krishna/login-2503
+        ports:
+        - containerPort: 80
+---
