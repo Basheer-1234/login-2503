@@ -108,6 +108,7 @@ resource "aws_network_acl" "login-public-nacl" {
 
 # Public NACL Association
 resource "aws_network_acl_association" "login-public-nacl-asc" {
+  for_each       = var.public_subnets_cidrs  
   network_acl_id = aws_network_acl.login-public-nacl.id
   subnet_id      = aws_subnet.public_subnets[each.key].id
 }
@@ -140,8 +141,9 @@ resource "aws_network_acl" "login-private-nacl" {
   }
 }
 
-# Public NACL Association
+# Private NACL Association
 resource "aws_network_acl_association" "login-private-nacl-asc" {
+  for_each       = var.private_subnets_cidrs
   network_acl_id = aws_network_acl.login-private-nacl.id
   subnet_id      = aws_subnet.private_subnets[each.key].id
 }
